@@ -325,7 +325,7 @@ $my-light-theme: mat.define-theme(
     ),
     typography: $m3-typography,
     density: (
-      scale: 0 // M3 default density,,,,
+      scale: -3 // M3 default density,,,,,
     ),
   )
 );
