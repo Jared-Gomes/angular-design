@@ -1,0 +1,110 @@
+<mat-sidenav-container class="app-sidenav-container" autosize>
+  <!-- Left Sidenav -->
+  <mat-sidenav #leftSidenav mode="over" position="start">
+    <mat-toolbar color="primary">
+      <span>Left Menu</span>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" (click)="leftSidenav.close()"
+        >Dashboard</a
+      >
+      <a mat-list-item routerLink="/grid-example" (click)="leftSidenav.close()"
+        >AG Grid</a
+      >
+      <!-- Add more nav items -->
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Right Sidenav -->
+  <mat-sidenav #rightSidenav mode="over" position="end">
+    <mat-toolbar>
+      <span>Options</span>
+    </mat-toolbar>
+    <div class="p-4">
+      <!-- Use tailwind padding -->
+      <p>Right Sidenav Content</p>
+      <button mat-icon-button (click)="toggleTheme()" aria-label="Toggle theme">
+        <mat-icon>brightness_6</mat-icon>
+        <!-- Icon suggests theme toggle -->
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <!-- Main Content Area -->
+  <mat-sidenav-content class="flex flex-col h-full">
+    <!-- Use flex for layout -->
+
+    <!-- Top Toolbar -->
+    <mat-toolbar color="primary" class="flex-shrink-0">
+      <!-- Prevent toolbar from shrinking -->
+      <button
+        mat-icon-button
+        (click)="toggleLeftSidenav()"
+        aria-label="Toggle left navigation menu"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="flex-auto">My App</span>
+      <!-- Use flex-auto to push buttons to the right -->
+
+      <!-- Hide these buttons on small screens where bottom bar appears -->
+      @if (!showBottomToolbar()) {
+      <button
+        mat-icon-button
+        aria-label="Example icon-button with a heart icon"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        aria-label="Example icon-button with a share icon"
+      >
+        <mat-icon>share</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        (click)="toggleRightSidenav()"
+        aria-label="Toggle right options menu"
+      >
+        <mat-icon>settings</mat-icon>
+      </button>
+      }
+    </mat-toolbar>
+
+    <!-- Router Outlet for Page Content -->
+    <main class="flex-grow p-4 overflow-auto">
+      <!-- Allow content to grow and scroll -->
+      <!-- Add some spacing using Tailwind -->
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- Bottom Toolbar (Mobile/Tablet) -->
+    @if (showBottomToolbar()) {
+    <mat-toolbar color="primary" class="app-bottom-toolbar">
+      <button
+        mat-icon-button
+        aria-label="Example icon-button with a heart icon"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <span class="flex-auto"></span>
+      <!-- Spacer -->
+      <button
+        mat-icon-button
+        aria-label="Example icon-button with a share icon"
+      >
+        <mat-icon>share</mat-icon>
+      </button>
+      <span class="flex-auto"></span>
+      <!-- Spacer -->
+      <button
+        mat-icon-button
+        (click)="toggleRightSidenav()"
+        aria-label="Toggle right options menu"
+      >
+        <mat-icon>settings</mat-icon>
+      </button>
+    </mat-toolbar>
+    }
+  </mat-sidenav-content>
+</mat-sidenav-container>
