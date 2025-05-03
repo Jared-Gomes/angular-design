@@ -1,29 +1,48 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use "@angular/material" as mat;
+@use "m3-theme";
 
-html {
-  @include mat.theme(
-    (
-      color: (
-        theme-type: light,
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
-      ),
-      typography: (
-        plain-family: "Inter",
-        brand-family: "Montserrat",
-      ),
-      density: -3,
-    )
-  );
-} /* You can add global styles to this file, and also import other style files */
+// Reset and base styles included via mat.core() in m3-theme.scss
+// Typography included via mat.typography-hierarchy() in m3-theme.scss
+// Theme styles included via mat.all-component-themes() in m3-theme.scss
+
+// Tailwind utilities should come after Material component themes
+// to ensure utility classes can override component styles if needed.
+@tailwind utilities;
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
-  font-family: Inter, "Helvetica Neue", sans-serif;
+  font-family: var(--plain-font); // Apply plain font globally
+  background-color: var(--mdc-sys-color-background); // Use M3 variable
+  color: var(--mdc-sys-color-on-background); // Use M3 variable
+}
+
+// Style for the layout container
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-sidenav-container {
+  flex: 1; // Fill remaining vertical space
+}
+
+// Add specific M3 overrides or adjustments if needed
+.mat-mdc-button {
+  // Example: Ensure buttons use the correct brand/plain font if needed,
+  // though typography config should handle most cases.
+}
+
+// Style for bottom toolbar on mobile/tablet
+.app-bottom-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0; // Ensure it spans full width
+  right: 0; // Ensure it spans full width
+  z-index: 100; // Keep above content
+  // Let Material theme handle background/color
 }
